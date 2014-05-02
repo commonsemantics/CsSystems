@@ -1,12 +1,17 @@
+import grails.util.Metadata
+
 // configuration for plugin testing - will not be included in the plugin zip
 
-log4j = {
-    // Example of changing the log pattern for the default console
-    // appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
+// Necessary for Grails 2.0 as the variable ${appName} is not available
+// anymore in the log4j closure. It needs the import above.
+def appName = Metadata.current.getApplicationName();
+
+grails.config.locations = ["classpath:${appName}-config.properties", "file:./${appName}-config.properties"]
+
+log4j = {	
+	appenders {
+		console name:'stdout', layout:pattern(conversionPattern: '%d{DATE} %5p %c{3} %m%n')
+	}
 
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
            'org.codehaus.groovy.grails.web.pages', //  GSP
@@ -21,4 +26,12 @@ log4j = {
            'net.sf.ehcache.hibernate'
 
     warn   'org.mortbay.log'
+	
+	info   'grails.app' 									// Necessary for Bootstrap logging
+			
+	debug  'grails.app.controllers.org.commonsemantics.grails.agents.controllers.TestsController',
+		   'grails.app.services.org.commonsemantics.grails.agents.AgentsService',
+		   'org.commonsemantics.grails.agents.utils',
+		   'grails.app.controllers.org.commonsemantics.grails.users.controllers.TestsController',
+		   'org.commonsemantics.grails.users.utils'
 }
