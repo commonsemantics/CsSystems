@@ -20,6 +20,8 @@
  */
 package org.commonsemantics.grails.systems.controllers
 
+import org.commonsemantics.grails.systems.model.SystemApi
+
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
  */
@@ -28,4 +30,18 @@ class TestsController {
 	static defaultAction = "index"
 	
 	def index = { render (view:'tests') }
+	
+	def showSystemApi = {
+		log.debug("[TEST] show-system-api " + (params.systemid?("(id:" + params.systemid + ")"):"(No id specified)"));
+		def systemApi = getSystemApi(params.systemid)
+		render (view:'system-api-show', model:[label:params.testId, description:params.testDescription, systemApi:systemApi]);
+	}
+	
+	private def getSystemApi(def id) {
+		def systemApi;
+		if(id==null)  systemApi = SystemApi.list()[0];
+		else systemApi = SystemApi.findById(id);
+		systemApi
+	}
+
 }

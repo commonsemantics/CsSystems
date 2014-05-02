@@ -223,6 +223,14 @@
 					<th>Description</th>
 					<th>Version 0.1</th>
 				</tr>		
+				
+				<g:render plugin="cs-agents" template="/tests/testEntry" 
+					model="[
+						action:'showSystemApi', 
+						plugin:'cs-systems',
+						testId: '50', 
+						testDescription: 'System Api show',
+						passed: 'false']" />
 			</table>	
 		</div>
 	</body>
