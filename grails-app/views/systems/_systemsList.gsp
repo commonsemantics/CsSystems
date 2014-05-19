@@ -77,21 +77,6 @@
 											onclick="return confirm('${message(code: 'default.button.disable.account.confirm.message', default: 'Are you sure you want to delete the group: '+group.shortName+' ?')}');" />
 									</span>
 								</g:if>
-								<%-- 
-								<g:if test="${GroupUtils.getStatusValue(group) == DefaultGroupStatus.LOCKED.value()}">
-									<span class="button">
-										<g:actionSubmit class="unlock" action="unlockGroup" value="${message(code: 'default.button.unlock.account.label', default: 'Unlock')}" />
-									</span>
-								</g:if>
-								<g:elseif test="${GroupUtils.getStatusValue(group) != DefaultGroupStatus.LOCKED.value()}">
-									<span class="button">
-										<g:actionSubmit class="lock" action="lockGroup" value="${message(code: 'default.button.lock.account.label', default: 'Lock')}"
-										onclick="return confirm('${message(code: 'default.button.lock.account.confirm.message', default: 'Are you sure you want to lock the group: '+group.shortName+' ?')}');" />
-									</span>
-								</g:elseif>
-								
-
-								--%>
 							</g:form>
 						
 						</div>	     		

@@ -73,6 +73,15 @@ Stylesheet
 						<g:else>-</g:else>
 					</td>
 				</tr>
+				<tr>
+					<td valign="top" width="150px"  align="left">
+						<g:message code="org.commonsemantics.grails.systems.model.field.apiKey" default="API key"/>
+					</td>
+					<td valign="top" width="265px" align="left">
+						<g:if test="${system.apikey}">${system.apikey}</g:if>
+						<g:else>-</g:else>
+					</td>
+				</tr>
 				<%-- 
 				<tr>
 					<td valign="top" width="150px"  align="left">
