@@ -1,13 +1,14 @@
 <%-- by Paolo Ciccarese --%>
 <%-- 
 Parameters list
- 1) item | instance of GroupCreateCommand
+ 1) system | instance of GroupCreateCommand
 Stylesheet
  1) fieldError | background and font color in erroneous text fields
 --%>
 <%@ page import="org.commonsemantics.grails.systems.utils.DefaultSystemStatus" %>
 <tr>
 	<td valign="top">
+		<g:hiddenField name="id" value="${system?.id}" /> 
 		<table class="simpleTable">
 			<tbody>
 				<tr class="prop">
@@ -17,12 +18,12 @@ Stylesheet
 					<td valign="top" width="255px" class="value">
 						<div>
 							<g:textField name="name" style="width: 240px;"
-								value="${item?.name}" class="${hasErrors(bean: item, field: 'name', 'fieldError')}"/>
+								value="${system?.name}" class="${hasErrors(bean: system, field: 'name', 'fieldError')}"/>
 						</div>
 					</td>
 					<td valign="top" class="caption">
-						<g:if test="${item?.name!=null}">
-							<g:renderErrors bean="${item}" field="name" />
+						<g:if test="${system?.name!=null}">
+							<g:renderErrors bean="${system}" field="name" />
 						</g:if> 
 						<g:else>
 				        	(max 255 chars)
@@ -35,11 +36,11 @@ Stylesheet
 					</td>
 					<td valign="top" class="value">
 						<g:textField name="shortName" style="width: 240px;"
-							value="${item?.shortName}" class="${hasErrors(bean: item, field: 'shortName', 'fieldError')}"/>
+							value="${system?.shortName}" class="${hasErrors(bean: system, field: 'shortName', 'fieldError')}"/>
 					</td>
 					<td valign="top" class="caption">
-						<g:if test="${item?.shortName!=null}">
-							<g:renderErrors bean="${item}" field="shortName" />
+						<g:if test="${system?.shortName!=null}">
+							<g:renderErrors bean="${system}" field="shortName" />
 						</g:if> 
 						<g:else>
 			           		(max 100 chars)
@@ -52,29 +53,16 @@ Stylesheet
 					</td>
 					<td valign="top" class="value">
 						<g:textArea name="description" style="width: 240px;"
-							value="${item?.description}"  class="${hasErrors(bean: item, field: 'description', 'fieldError')}"/>
+							value="${system?.description}"  class="${hasErrors(bean: system, field: 'description', 'fieldError')}"/>
 					</td>
 					<td valign="top" class="caption">
-						<g:if test="${item?.description!=null}">
-							<g:renderErrors bean="${item}" field="description" />
+						<g:if test="${system?.description!=null}">
+							<g:renderErrors bean="${system}" field="description" />
 						</g:if> 
 						<g:else>
 			           		(max 1024 chars)
 			            </g:else>
 			        </td>
-				</tr>
-				<tr>
-					<td valign="top"  align="left">
-						<label for="description">Created by</label>
-					</td>
-					<td valign="top" align="left">
-						<g:if test="${item?.createdBy!=null}">
-							<g:link action="showUser" id="${item?.createdBy.id}">${item?.createdBy.displayName}</g:link>
-						</g:if>
-						<g:else>
-							<%-- <g:link action="showUser" id="${loggedUser.id}">${loggedUser.displayName}</g:link> --%>
-						</g:else>
-					</td>
 				</tr>
 				<tr class="prop">
 					<td valign="top" class="name">
@@ -85,13 +73,13 @@ Stylesheet
 							<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
 						</g:if>
 						<g:else>
-							<g:if test="${item?.enabled==true}">
-								<g:radio name="status" value="item?.enabled" checked="checked"/> Enabled
-								<g:radio name="status" value="item?.enabled" /> Disabled
+							<g:if test="${system?.enabled==true}">
+								<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
+								<g:radio name="status" value="${DefaultSystemStatus.DISABLED.value()}" /> Disabled
 							</g:if>
 							<g:else>
-								<g:radio name="status" value="item?.enabled"/> Enabled
-								<g:radio name="status" value="item?.enabled" checked="checked"/> Disabled
+								<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}"/> Enabled
+								<g:radio name="status" value="${DefaultSystemStatus.DISABLED.value()}" checked="checked"/> Disabled
 							</g:else>
 						</g:else>
 			        </td>

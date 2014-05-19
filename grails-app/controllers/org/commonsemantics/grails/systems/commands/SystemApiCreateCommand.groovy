@@ -56,15 +56,21 @@ class SystemApiCreateCommand {
 	SystemApi createSystem() {
 		// Names and nicknames are supposed to be unique
 		println '-------createSystem'
-		if(SystemApi.findByName(name)!=null || SystemApi.findByShortName(shortName)!=null) 
-			return null;
-
-		// If the group does not exist I create a new one
-		else {
+		if(SystemApi.findByName(name)!=null || SystemApi.findByShortName(shortName)!=null) {
+			println '-------createSystem 1'
+			def system = SystemApi.findByName(name);
+			if(system!=null) return system;
+			else {
+				system = SystemApi.findByShortName(shortName);
+				return system; 
+			}
+		} else {
+			println '-------createSystem 2'
 			def key = UUID.randomUUID() as String
 			SystemApi sys = new SystemApi(
 				name:name, shortName:shortName, description:description, 
 				enabled:true, apikey:key);
+			return sys;
 		}
 	}
 }

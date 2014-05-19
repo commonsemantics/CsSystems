@@ -23,6 +23,7 @@ package org.commonsemantics.grails.systems.services
 import org.commonsemantics.grails.groups.model.Group
 import org.commonsemantics.grails.systems.model.SystemApi
 import org.commonsemantics.grails.systems.model.UserSystemApi
+import org.commonsemantics.grails.systems.utils.DefaultSystemStatus
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -70,5 +71,14 @@ class SystemsService {
 		}
 		
 		[systems, systemsCount]
+	}
+	
+	def updateSystemStatus(def system, def status) {
+		log.debug 'System ' + system + ' status ' + status
+		if(status.equals(DefaultSystemStatus.ACTIVE.value())) {
+			system.enabled = true
+		} else if(status.equals(DefaultSystemStatus.DISABLED.value())) {
+			system.enabled = false
+		} 
 	}
 }

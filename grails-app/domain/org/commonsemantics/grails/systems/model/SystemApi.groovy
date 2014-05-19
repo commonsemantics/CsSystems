@@ -32,6 +32,10 @@ import org.commonsemantics.grails.users.model.User
 @Validateable
 class SystemApi {
 
+	public static final Integer NAME_MAX_SIZE = 255;
+	public static final Integer SHORTNAME_MAX_SIZE = 16;
+	public static final Integer DESCRIPION_MAX_SIZE = 1024;
+	
 	String id;
 	String name;
 	String shortName;
@@ -62,11 +66,15 @@ class SystemApi {
 	static hasMany = [groups: Group, users: User]
 	
 	String getUri() {
-		return "urn:group:uuid:"+id;
+		return "urn:system:uuid:"+id;
 	}
+	
+	static mandatory = ['name']
+	static optional = []
 	
 	static mapping = {
 		id generator:'uuid', sqlType: "varchar(36)"
+		version false
 	}
 	
 	static constraints = {
@@ -74,8 +82,8 @@ class SystemApi {
 		
 		apikey (nullable:false, blank: false, unique: true, maxSize:255)
 		
-		name (nullable:false, blank: false, maxSize:255)
-		shortName  (nullable:true, blank: true, maxSize:100)
-		description (nullable:false, blank:true, maxSize:1024)
+		name (nullable:false, blank: false, maxSize:NAME_MAX_SIZE)
+		shortName  (nullable:true, blank: true, maxSize:SHORTNAME_MAX_SIZE)
+		description (nullable:true, blank:true, maxSize:DESCRIPION_MAX_SIZE)
 	}
 }
