@@ -13,7 +13,6 @@
 							<td class="value" valign="top"><input name="name" value="${name}" type="text"></td>                  
 							<td class="name" valign="top">Short name:</td>             
 							<td class="value" valign="top"><input name="shortName" value="${shortName}" type="text"></td>  
-							<td class="name" valign="top"><input name="hideempty" value="${onlyunlocked}" type="checkbox"> Include Locked</td> 
 							<td class="name" valign="top"><input name="onlyactive" value="${onlydisabled}" type="checkbox"> Include Disabled</td>   
 							<td style="padding-left: 4px;width: 20px; display: block; padding-top:6px;"><span id="ajaxIcon" class="ajaxIcon" style="display:none;"><img src="${resource(dir:'images',file:'spinner.gif')}" alt="${message(code:'spinner.alt',default:'Loading...')}"/></span></td>
 							<td style="padding-left: 4px;"><input type="submit" value="Search systems" style="width:120px" /></td>
