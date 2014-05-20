@@ -78,7 +78,7 @@ Parameters list
 								<g:actionSubmit class="save" action="saveSystem" value="${message(code: 'default.button.edit.account.label', default: 'Save system')}" />
 							</span>
 							<span class="button">
-								<g:actionSubmit class="cancel" action="listSystems" value="${message(code: 'default.button.edit.account.label', default: 'Cancel')}" />
+								<g:actionSubmit class="disable" action="listSystems" value="${message(code: 'default.button.edit.account.label', default: 'Cancel')}" />
 							</span>
 						</div>
 					</td>
