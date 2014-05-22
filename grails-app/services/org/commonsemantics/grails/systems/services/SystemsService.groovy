@@ -81,4 +81,11 @@ class SystemsService {
 			system.enabled = false
 		} 
 	}
+	
+	def isApiKeyValid(def apiKey) {
+		log.info("Validating API key [" + apiKey + "]");
+		def system = SystemApi.findByApikey(apiKey);
+		if(system!=null && system.enabled) return true;
+		else return false;
+	}
 }
