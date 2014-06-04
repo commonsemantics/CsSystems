@@ -70,16 +70,16 @@ Stylesheet
 					</td>
 					<td valign="top" colspan="2" class="value">
 						<g:if test="${action=='create'}">
-							<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
+							<g:radio name="systemStatus" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
 						</g:if>
 						<g:else>
 							<g:if test="${system?.enabled==true}">
-								<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
-								<g:radio name="status" value="${DefaultSystemStatus.DISABLED.value()}" /> Disabled
+								<g:radio name="systemStatus" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
+								<g:radio name="systemStatus" value="${DefaultSystemStatus.DISABLED.value()}" /> Disabled
 							</g:if>
 							<g:else>
-								<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}"/> Enabled
-								<g:radio name="status" value="${DefaultSystemStatus.DISABLED.value()}" checked="checked"/> Disabled
+								<g:radio name="systemStatus" value="${DefaultSystemStatus.ACTIVE.value()}"/> Enabled
+								<g:radio name="systemStatus" value="${DefaultSystemStatus.DISABLED.value()}" checked="checked"/> Disabled
 							</g:else>
 						</g:else>
 			        </td>

@@ -56,16 +56,16 @@ Parameters list
 					</td>
 					<td valign="top" colspan="2" class="value">
 						<g:if test="${action=='create'}">
-							<g:radio name="status" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
+							<g:radio name="systemStatus" value="${DefaultSystemStatus.ACTIVE.value()}" checked="checked"/> Enabled
 						</g:if>
 						<g:else>
 							<g:if test="${system?.enabled==true}">
-								<g:radio name="status" value="system?.enabled" checked="checked"/> Enabled
-								<g:radio name="status" value="system?.enabled" /> Disabled
+								<g:radio name="systemStatus" value="system?.enabled" checked="checked"/> Enabled
+								<g:radio name="systemStatus" value="system?.enabled" /> Disabled
 							</g:if>
 							<g:else>
-								<g:radio name="status" value="system?.enabled"/> Enabled
-								<g:radio name="status" value="system?.enabled" checked="checked"/> Disabled
+								<g:radio name="systemStatus" value="system?.enabled"/> Enabled
+								<g:radio name="systemStatus" value="system?.enabled" checked="checked"/> Disabled
 							</g:else>
 						</g:else>
 			        </td>

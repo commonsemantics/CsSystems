@@ -50,6 +50,11 @@ class SystemApi {
 	 */
 	String apikey;
 	/**
+	 * Secret key that could be used for authentication
+	 */
+	String secretkey;
+	
+	/**
 	 * System access can be disabled.
 	 */
 	boolean enabled
@@ -81,6 +86,8 @@ class SystemApi {
 		id maxSize: 36
 		
 		apikey (nullable:false, blank: false, unique: true, maxSize:255)
+		
+		secretkey (nullable:true, blank: false, unique: true, maxSize:255)
 		
 		name (nullable:false, blank: false, maxSize:NAME_MAX_SIZE)
 		shortName  (nullable:true, blank: true, maxSize:SHORTNAME_MAX_SIZE)
