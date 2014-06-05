@@ -75,6 +75,19 @@ Stylesheet
 				</tr>
 				<tr>
 					<td valign="top" width="150px"  align="left">
+						<g:message code="org.commonsemantics.grails.systems.model.field.createdBy" default="Admnistered By"/>
+					</td>
+					<td valign="top" width="265px" align="left">
+						<g:if test="${system.admins}">
+							<g:each in="${system.admins}">
+								<g:link action="showUser" id="${it.id}">${it.username}</g:link>
+							</g:each>
+						</g:if>
+						<g:else>-</g:else>
+					</td>
+				</tr>
+				<tr>
+					<td valign="top" width="150px"  align="left">
 						<g:message code="org.commonsemantics.grails.systems.model.field.apiKey" default="API key"/>
 					</td>
 					<td valign="top" width="265px" align="left">

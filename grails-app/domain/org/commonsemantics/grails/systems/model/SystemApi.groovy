@@ -68,7 +68,7 @@ class SystemApi {
 	 * Grants access to the data belonging to specified groups and
 	 * users.
 	 */
-	static hasMany = [groups: Group, users: User]
+	static hasMany = [admins: User, groups: Group, users: User]
 	
 	String getUri() {
 		return "urn:system:uuid:"+id;
