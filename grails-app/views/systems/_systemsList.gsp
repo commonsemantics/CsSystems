@@ -4,7 +4,7 @@
 <div class="dialog">
 	
 <div class="list">
-	<g:set var="g" value="${group}"/>
+	<g:set var="g" value="${system}"/>
 	<table class="tablelist">
 		<thead>
 			<tr>
@@ -14,7 +14,7 @@
 				<g:sortableColumn property="dateCreated" title="${message(code: 'agentPerson.id.label', default: 'Created on')}" />
 				<g:sortableColumn property="lastUpdated" title="${message(code: 'agentPerson.id.label', default: 'Last updated')}" />
 				<g:sortableColumn property="status" title="${message(code: 'agentPerson.id.label', default: 'Status')}" />
-				<g:sortableColumn property="groupsCount" title="${message(code: 'agentPerson.id.label', default: '#Admins')}" />
+				<g:sortableColumn property="systemsCount" title="${message(code: 'agentPerson.id.label', default: '#Admins')}" />
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -24,29 +24,29 @@
 					<td colspan="8">No Systems have been defined</td>
 				</tr>
 			</g:if>
-			<g:each in="${systems}" status="i" var="group">
+			<g:each in="${systems}" status="i" var="system">
 				<tr class="${(i % 2) == 0 ? 'odd' : 'even'}">
 		     		<td>
-						<g:link action="showSystem" id="${group.id}">
-		     				${group.name}
+						<g:link action="showSystem" id="${system.id}">
+		     				${system.name}
 						</g:link>
 		     		</td>
 		     		<td>
-						${group.shortName}
+						${system.shortName}
 		     		</td>
 		     		<td>
-						${group.description}
+						${system.description}
 		     		</td>
-		     		<td><g:formatDate format="MM/dd/yyyy hh:mm" date="${group.dateCreated}"/></td>
-		     		<td><g:formatDate format="MM/dd/yyyy hh:mm" date="${group.lastUpdated}"/></td>
+		     		<td><g:formatDate format="MM/dd/yyyy hh:mm" date="${system.dateCreated}"/></td>
+		     		<td><g:formatDate format="MM/dd/yyyy hh:mm" date="${system.lastUpdated}"/></td>
 		     		<td>	
-		     			<g:if test="${group.enabled==true}">Enabled</g:if>
+		     			<g:if test="${system.enabled==true}">Enabled</g:if>
 			     		<g:else>Disabled</g:else>
 		     		</td>
 		     		<td>
-		     			<g:each in="${systemsCount}" var="groupCount">
-		     				<g:if test="${groupCount.key == group.id}">
-		     						${groupCount.value}
+		     			<g:each in="${systemsCount}" var="systemCount">
+		     				<g:if test="${systemCount.key == system.id}">
+		     						${systemCount.value}
 		     				</g:if>
 		     			</g:each>
 		     		</td>
@@ -55,26 +55,26 @@
 			     		<div class="buttons">
 			     		
 							<g:form>
-								<g:hiddenField name="id" value="${group?.id}" /> 
+								<g:hiddenField name="id" value="${system?.id}" /> 
 								<g:hiddenField name="redirect" value="listSystems" />
 								<span class="button">
 									<g:actionSubmit class="edit" action="editSystem" value="${message(code: 'default.button.edit.account.label', default: 'Edit')}" />
 								</span>
-								<g:if test="${group.enabled!=true}">
+								<g:if test="${system.enabled!=true}">
 									<span class="button">
 										<g:actionSubmit class="enable" action="enableSystem" value="${message(code: 'default.button.enable.account.label', default: 'Enable')}" />
 									</span>
 								</g:if>
-								<g:elseif test="${group.enabled==true}">
+								<g:elseif test="${system.enabled==true}">
 									<span class="button">
 										<g:actionSubmit class="disable" action="disableSystem" value="${message(code: 'default.button.disable.account.label', default: 'Disable')}" 
-											onclick="return confirm('${message(code: 'default.button.disable.account.confirm.message', default: 'Are you sure you want to disable the group: '+group.shortName+' ?')}');" />
+											onclick="return confirm('${message(code: 'default.button.disable.account.confirm.message', default: 'Are you sure you want to disable the system: '+system.shortName+' ?')}');" />
 									</span>
 								</g:elseif>
-								<g:if test="${systemsCount[group.id] == 0}">
+								<g:if test="${systemsCount[system.id] == 0}">
 									<span class="button">
 										<g:actionSubmit class="delete" action="deleteSystem" value="${message(code: 'default.button.edit.account.label', default: 'Delete')}"
-											onclick="return confirm('${message(code: 'default.button.disable.account.confirm.message', default: 'Are you sure you want to delete the group: '+group.shortName+' ?')}');" />
+											onclick="return confirm('${message(code: 'default.button.disable.account.confirm.message', default: 'Are you sure you want to delete the system: '+system.shortName+' ?')}');" />
 									</span>
 								</g:if>
 							</g:form>

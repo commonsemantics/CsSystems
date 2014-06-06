@@ -78,9 +78,9 @@ Stylesheet
 						<g:message code="org.commonsemantics.grails.systems.model.field.createdBy" default="Admnistered By"/>
 					</td>
 					<td valign="top" width="265px" align="left">
-						<g:if test="${system.admins}">
-							<g:each in="${system.admins}">
-								<g:link action="showUser" id="${it.id}">${it.username}</g:link>
+						<g:if test="${usersystems}">
+							<g:each in="${usersystems}">
+								<g:link action="showUser" id="${it.user.id}">${it.user.username}</g:link>
 							</g:each>
 						</g:if>
 						<g:else>-</g:else>

@@ -45,12 +45,12 @@ class SystemsService {
 		if (sort == 'systemsCount') {
 			systemsCount = systemsCount.sort{ a, b -> a.value <=> b.value }
 			if(_order == "desc")
-				systemsCount.each { groupCount ->
-					systems.add SystemApi.findById(groupCount.key);
+				systemsCount.each { systemCount ->
+					systems.add SystemApi.findById(systemCount.key);
 				}
 			else
-				systemsCount.reverseEach { groupCount ->
-					systems.add SystemApi.findById(groupCount.key);
+				systemsCount.reverseEach { systemCount ->
+					systems.add SystemApi.findById(systemCount.key);
 				}
 		} else if (sort == 'status') {
 			systemsStatus = systemsStatus.sort{ a, b -> a.value.compareTo(b.value) }
@@ -69,7 +69,7 @@ class SystemsService {
 				order(sort, _order)
 			}
 		}
-		
+		println systemsCount
 		[systems, systemsCount]
 	}
 	
