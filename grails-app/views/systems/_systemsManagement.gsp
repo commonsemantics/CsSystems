@@ -49,7 +49,8 @@
 			     		<div class="buttons">		     		
 							<g:form>
 								<g:hiddenField name="id" value="${system?.id}" /> 
-								<g:hiddenField name="redirect" value="listSystems" />
+								<g:hiddenField name="redirect" value="manageUserSystems" />
+								<g:hiddenField name="targetid" value="${user.id}" />
 								<span class="button">
 									<g:actionSubmit class="edit" action="editSystem" value="${message(code: 'default.button.edit.account.label', default: 'Edit')}" />
 								</span>
