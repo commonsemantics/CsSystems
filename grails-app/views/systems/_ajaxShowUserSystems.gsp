@@ -16,8 +16,7 @@ Stylesheet
 							<tr>
 								<th style="width: 200px">${message(code: 'agentPerson.id.label', default: 'System Name')}</th>
 								<th style="width: 200px">${message(code: 'agentPerson.id.label', default: 'Since')}</th>
-								<th>${message(code: 'agentPerson.id.label', default: 'User Role')}</th>
-								<th>${message(code: 'agentPerson.id.label', default: 'Membership')}</th>
+								<th>${message(code: 'agentPerson.id.label', default: 'Status')}</th>
 							</tr>
 						</thead>
 						<tbody id="systemsContent">

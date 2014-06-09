@@ -88,4 +88,14 @@ class SystemsService {
 		if(system!=null && system.enabled) return true;
 		else return false;
 	}
+	
+	def listUserSystems(def user, def _max, def _offset, def sort, def _order) {
+		def searchResult = UserSystemApi.createCriteria().list(
+			max:_max, offset:_offset) {
+				eq('user', user);
+		}
+		def allUserSystems = searchResult
+		
+		allUserSystems
+	}
 }
