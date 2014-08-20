@@ -20,7 +20,7 @@ import org.commonsemantics.grails.users.utils.DefaultUsersRoles
 class BootStrap {
 
 	def grailsApplication
-	def systemTypesService
+	def systemsTypesService
 	
     def init = { servletContext ->
 		
@@ -170,7 +170,7 @@ class BootStrap {
 		
 		separator();
 		log.info  "Registering Systems Types..."
-		systemTypesService.register();
+		systemsTypesService.register();
 		
 		separator();
 
