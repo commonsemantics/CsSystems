@@ -33,7 +33,7 @@ class SystemsTypesService {
 	def register() {
 		def enumeration = null;
 		def enumerationClass = grailsApplication.config.org.commonsemantics.grails.systems.types
-		if(enumerationClass!=null) enumeration = this.getClass().classLoader.findClass(enumerationClass)
+		if(enumerationClass!=null && enumerationClass.size()==1) enumeration = this.getClass().classLoader.findClass(enumerationClass)
 		else enumeration = DefaultSystemTypes;
 		
 		enumeration.values().each {
