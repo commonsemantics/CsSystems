@@ -20,12 +20,12 @@
  */
 package org.commonsemantics.grails.systems.utils
 
-enum DefaultSystemsType {
+enum DefaultSystemTypes {
 
 	TEST1("TestSystem1", "Testing system 1", "org.commonsemantics.grails.systems.utils.type.TestSystem1"),
-	TEST2("TestSystem2", "Testing system 2", "org.commonsemantics.grails.systems.utils.type.TestSystem2")
+	TEST2("TestSystem2", "Testing system 2", "org.commonsemantics.grails.systems.utils.type.TestSystem2"),
 	
-	DefaultSystemsType(String shortName, String description, String globalIdentifier) {
+	DefaultSystemTypes(String shortName, String description, String globalIdentifier) {
 		this.shortName = shortName;
 		this.description = description;
 		this.globalIdentifier = globalIdentifier;

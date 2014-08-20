@@ -20,10 +20,8 @@
  */
 package org.commonsemantics.grails.systems.services
 
-import java.lang.reflect.Method
-
 import org.commonsemantics.grails.systems.model.SystemType
-import org.commonsemantics.grails.systems.utils.DefaultSystemType
+import org.commonsemantics.grails.systems.utils.DefaultSystemTypes
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -36,7 +34,7 @@ class SystemsTypesService {
 		def enumeration = null;
 		def enumerationClass = grailsApplication.config.org.commonsemantics.grails.systems.types
 		if(enumerationClass!=null) enumeration = this.getClass().classLoader.findClass(enumerationClass)
-		else enumeration = DefaultSystemType;
+		else enumeration = DefaultSystemTypes;
 		
 		enumeration.values().each {
 			if(!SystemType.findByGlobalIdentifier(it.globalIdentifier())) {
