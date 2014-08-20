@@ -23,6 +23,7 @@ class BootStrap {
 	
 	def usersInitializationService
 	def groupsInitializationService
+	def systemsInitializationService
 	
 	def systemsTypesService
 	
@@ -71,6 +72,12 @@ class BootStrap {
 		separator();
 		log.info  '** User Status in Group'
 		groupsInitializationService.initializeUserStatusInGroup();
+		
+		// SYSTEMS
+		// -------
+		separator();
+		log.info  '** Systems Status'
+		systemsInitializationService.initializeStatus();
 		
 		separator();
 		log.info  '>> USERS'
