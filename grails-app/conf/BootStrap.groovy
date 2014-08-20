@@ -10,14 +10,17 @@ import org.commonsemantics.grails.groups.utils.DefaultGroupPrivacy
 import org.commonsemantics.grails.groups.utils.DefaultGroupRoles
 import org.commonsemantics.grails.groups.utils.DefaultGroupStatus
 import org.commonsemantics.grails.groups.utils.DefaultUserStatusInGroup
+import org.commonsemantics.grails.users.model.ProfilePrivacy
 import org.commonsemantics.grails.users.model.Role
 import org.commonsemantics.grails.users.model.User
 import org.commonsemantics.grails.users.model.UserRole
+import org.commonsemantics.grails.users.utils.DefaultUsersProfilePrivacy
 import org.commonsemantics.grails.users.utils.DefaultUsersRoles
 
 class BootStrap {
 
 	def grailsApplication
+	def systemTypesService
 	
     def init = { servletContext ->
 		
@@ -47,6 +50,15 @@ class BootStrap {
 			if(!Role.findByAuthority(it.value())) {
 				new Role(authority: it.value(), ranking: it.ranking(), label: it.label(), description: it.description()).save(failOnError: true)
 				log.info "Initialized: " + it.value()
+			}
+		}
+		
+		DefaultUsersProfilePrivacy.values().each {
+			if(!ProfilePrivacy.findByValue(it.value())) {
+				new ProfilePrivacy(value: it.value(), label: it.label(), description: it.description()).save(failOnError: true)
+				log.info "Initialized: " + it.value()
+			} else {
+				log.info "Found: " + it.value()
 			}
 		}
 
@@ -112,6 +124,7 @@ class BootStrap {
 		if(admin==null) {
 			admin = new User(username: adminUsername,
 				password: password, person: person, firstName: 'Jack', lastName: 'White',
+				profilePrivacy:  ProfilePrivacy.findByValue(DefaultUsersProfilePrivacy.PRIVATE.value()),
 				displayName: 'Dr. White', enabled: true, email:'paolo.ciccarese@gmail.com').save(failOnError: true)
 			log.warn  "CHANGE PASSWORD for: " + adminUsername + "!!!"
 		}
@@ -136,6 +149,7 @@ class BootStrap {
 		//////////GROUPS TESTS
 		separator();
 		def group0 = "Test Group 0"
+		log.info  '** Group ' + group0
 		def testGroup0 = Group.findByName(group0) ?: new Group(
 			name: group0,
 			shortName: 'TG0',
@@ -153,6 +167,10 @@ class BootStrap {
 			status: UserStatusInGroup.findByValue(DefaultUserStatusInGroup.ACTIVE.value())
 		).save(failOnError: true, flash: true)
 		testUserGroup1.addToRoles GroupRole.findByAuthority(DefaultGroupRoles.ADMIN.value())
+		
+		separator();
+		log.info  "Registering Systems Types..."
+		systemTypesService.register();
 		
 		separator();
 
