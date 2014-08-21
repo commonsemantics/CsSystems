@@ -67,10 +67,13 @@ class BootStrap {
 		separator('** Systems Status');
 		systemsInitializationService.initializeStatus();
 		
+		separator();
+		log.info  "Registering Systems Types..."
+		systemsTypesService.register();
+		
 		// ENTITIES
 		// --------
 		demarcation('>> INITIALIZING DEFAULTS ENTITIES');
-		demarcation('>> USERS');
 		separator('** Users');
 		
 		def person = Person.findByEmail('paolo.ciccarese@gmail.com');
@@ -81,8 +84,7 @@ class BootStrap {
 				displayName: 'Dr. White',
 				email:'paolo.ciccarese@gmail.com'
 			).save(failOnError: true);
-		}
-		
+		}	
 		
 		def password = 'password'
 		def adminUsername = 'admin'
@@ -98,11 +100,11 @@ class BootStrap {
 		UserRole.create admin, Role.findByAuthority(DefaultUsersRoles.USER.value())
 		UserRole.create admin, Role.findByAuthority(DefaultUsersRoles.MANAGER.value())
 		UserRole.create admin, Role.findByAuthority(DefaultUsersRoles.ADMIN.value())
-	
 		
 		separator();
-		def name = 'Software Test';
-		log.info  '** Software ' + name
+		log.info  '** Software '
+		def name = 'Software Test';		
+		log.info  "Initializing: " + name
 		def software = Software.findByName(name);
 		if(software==null) {
 			software = new Software(
@@ -115,8 +117,9 @@ class BootStrap {
 		
 		//////////GROUPS TESTS
 		separator();
+		log.info  '** Groups'
 		def group0 = "Test Group 0"
-		log.info  '** Group ' + group0
+		log.info  "Initializing: " + group0
 		def testGroup0 = Group.findByName(group0) ?: new Group(
 			name: group0,
 			shortName: 'TG0',
@@ -135,12 +138,8 @@ class BootStrap {
 		).save(failOnError: true, flash: true)
 		testUserGroup1.addToRoles GroupRole.findByAuthority(DefaultGroupRoles.ADMIN.value())
 		
-		separator();
-		log.info  "Registering Systems Types..."
-		systemsTypesService.register();
-		
-		separator();
-
+		demarcation(">> Bootstrapping completed!")
+		separator()
     }
 	
 	private demarcation() {
