@@ -29,60 +29,49 @@ class BootStrap {
 	
     def init = { servletContext ->
 		
-		log.info  '========================================================================';
-		log.info  ' COMMON SEMANTICS: SYSTEMS (v.' +
+		// ABOUT
+		// ------
+		demarcation(
+			' COMMON SEMANTICS: SYSTEMS (v.' +
 			grailsApplication.metadata['app.version'] + ", b." +
-			grailsApplication.metadata['app.build'] + ")";
-			
+			grailsApplication.metadata['app.build'] + ")");
 		separator();
 		log.info  ' By Paolo Ciccarese (http://paolociccarese.info/)'
 		log.info  ' Copyright 2014 Common Semantics'
-		
 		separator();
 		log.info  ' Released under the Apache License, Version 2.0'
 		log.info  ' url:http://www.apache.org/licenses/LICENSE-2.0'
-
-		log.info  '========================================================================';
-		log.info  'Bootstrapping....'
+		demarcation('>> Bootstrapping....');	
+		demarcation('>> INITIALIZING DEFAULTS ENUMERATIONS');
 		
-		separator();
-		log.info  '>> INITIALIZING DEFAULTS'
-		separator();
-		log.info  '** Users Roles'
+		// USERS
+		// ------
+		separator('** Users Roles');
 		usersInitializationService.initializeRoles();
-		separator();
-		log.info  '** Users Profile Privacy'
+		separator('** Users Profile Privacy');
 		usersInitializationService.initializeProfilePrivacy();
 
 		// GROUPS
 		// ------
-		//////////ROLES
-		separator();
-		log.info  '** Groups Roles'
+		separator('** Groups Roles');
 		groupsInitializationService.initializeRoles();
-		//////////STATUS
-		separator();
-		log.info  '** Groups Status'
+		separator('** Groups Status');
 		groupsInitializationService.initializeStatus();
-		//////////PRIVACY
-		separator();
-		log.info  '** Groups Privacy'
+		separator('** Groups Privacy');
 		groupsInitializationService.initializePrivacy();
-		//////////USER STATUS IN GROUP
-		separator();
-		log.info  '** User Status in Group'
+		separator('** User Status in Group');
 		groupsInitializationService.initializeUserStatusInGroup();
 		
 		// SYSTEMS
 		// -------
-		separator();
-		log.info  '** Systems Status'
+		separator('** Systems Status');
 		systemsInitializationService.initializeStatus();
 		
-		separator();
-		log.info  '>> USERS'
-		separator();
-		log.info  '** Users'
+		// ENTITIES
+		// --------
+		demarcation('>> INITIALIZING DEFAULTS ENTITIES');
+		demarcation('>> USERS');
+		separator('** Users');
 		
 		def person = Person.findByEmail('paolo.ciccarese@gmail.com');
 		if(person==null) {
@@ -153,8 +142,20 @@ class BootStrap {
 		separator();
 
     }
-	def separator = {
+	
+	private demarcation() {
+		log.info  '========================================================================';
+	}
+	private demarcation(message) {
+		demarcation();
+		log.info  message
+	}
+	private separator() {
 		log.info  '------------------------------------------------------------------------';
+	}
+	private separator(message) {
+		separator();
+		log.info  message
 	}
     def destroy = {
     }
