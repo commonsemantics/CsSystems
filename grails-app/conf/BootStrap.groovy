@@ -25,8 +25,6 @@ class BootStrap {
 	def groupsInitializationService
 	def systemsInitializationService
 	
-	def systemsTypesService
-	
     def init = { servletContext ->
 		
 		// ABOUT
@@ -66,10 +64,8 @@ class BootStrap {
 		// -------
 		separator('** Systems Status');
 		systemsInitializationService.initializeStatus();
-		
-		separator();
-		log.info  "Registering Systems Types..."
-		systemsTypesService.register();
+		separator('** Systems Types');
+		systemsInitializationService.initializeTypes();
 		
 		// ENTITIES
 		// --------

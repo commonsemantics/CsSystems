@@ -10,7 +10,8 @@ grails.config.locations = ["classpath:${appName}-config.properties", "file:./${a
 
 log4j = {	
 	appenders {
-		console name:'stdout', layout:pattern(conversionPattern: '%d{DATE} %5p %c{3} %m%n')
+		console name:'stdout', threshold: org.apache.log4j.Level.ALL, 
+			layout:pattern(conversionPattern: '%d{mm:ss,SSS} %5p %c{3} %m%n')
 	}
 
     error  'org.codehaus.groovy.grails.web.servlet',  //  controllers
@@ -27,11 +28,15 @@ log4j = {
 
     warn   'org.mortbay.log'
 	
-	info   'grails.app' 									// Necessary for Bootstrap logging
+	info   'grails.app'  // Necessary for Bootstrap logging
 			
 	debug  'grails.app.controllers.org.commonsemantics.grails.agents.controllers.TestsController',
 		   'grails.app.services.org.commonsemantics.grails.agents.AgentsService',
 		   'org.commonsemantics.grails.agents.utils',
 		   'grails.app.controllers.org.commonsemantics.grails.users.controllers.TestsController',
 		   'org.commonsemantics.grails.users.utils'
+		   
+	trace  'grails.app.services.org.commonsemantics.grails.users.services',
+		   'grails.app.services.org.commonsemantics.grails.groups.services',
+		   'grails.app.services.org.commonsemantics.grails.systems.services'
 }

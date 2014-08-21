@@ -21,7 +21,9 @@
 package org.commonsemantics.grails.systems.services
 
 import org.commonsemantics.grails.systems.model.SystemStatus
+import org.commonsemantics.grails.systems.model.SystemType
 import org.commonsemantics.grails.systems.utils.DefaultSystemStatus
+import org.commonsemantics.grails.systems.utils.DefaultSystemTypes
 
 /**
  * @author Paolo Ciccarese <paolo.ciccarese@gmail.com>
@@ -36,19 +38,43 @@ class SystemsInitializationService {
 		if(enumerationClass!=null &&
 				((enumerationClass instanceof ConfigObject && !enumerationClass.isEmpty()) ||
 				(enumerationClass instanceof String && enumerationClass.trim().length()>0))) {
-			log.info "Selected enumeration status " + enumerationClass
+			log.debug "Selected enumeration status " + enumerationClass
 			enumeration = this.getClass().classLoader.findClass(enumerationClass)
 		} else {
-			log.info "Selected default enumeration status"
+			log.debug "Selected default enumeration status"
 			enumeration = DefaultSystemStatus;
 		}
 		
 		enumeration.values().each {
 			if(!SystemStatus.findByValue(it.value())) {
 				new SystemStatus(value: it.value(), uuid: it.uuid(), label: it.label(), description: it.description()).save(failOnError: true)
-				log.info "Initialized: " + it.value()
+				log.trace "Initialized: " + it.value()
 			} else {
-				log.info "Found: " + it.value()
+				log.trace "Found: " + it.value()
+			}
+		}
+	}
+	
+	
+	def initializeTypes() {
+		def enumeration = null;
+		def enumerationClass = grailsApplication.config.org.commonsemantics.grails.systems.types
+		if(enumerationClass!=null &&
+				((enumerationClass instanceof ConfigObject && !enumerationClass.isEmpty()) ||
+				(enumerationClass instanceof String && enumerationClass.trim().length()>0))) {
+			log.debug "Selected enumeration types " + enumerationClass
+			enumeration = this.getClass().classLoader.findClass(enumerationClass)
+		} else {
+			log.debug "Selected default enumeration types"
+			enumeration = DefaultSystemTypes;
+		}
+		
+		enumeration.values().each {
+			if(!SystemType.findByGlobalIdentifier(it.globalIdentifier())) {
+				new SystemType(globalIdentifier: it.globalIdentifier(), shortName: it.shortName(), description: it.description()).save(failOnError: true)
+				log.trace "Initialized: " + it.globalIdentifier()
+			} else {
+				log.trace "Found: " + it.globalIdentifier()
 			}
 		}
 	}
